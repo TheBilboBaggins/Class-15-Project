@@ -6,7 +6,7 @@ var gameOver,gameOVer
 //Game States
 var PLAY=1;
 var END=0;
-var gameState=1;
+var gameState=PLAY;
 
 function preload(){
   pathImg = loadImage("Road.png");
@@ -29,7 +29,7 @@ path.velocityY = 4;
 
 gameOVer = createSprite(200,200)
 gameOVer.addImage(gameOver)
-gameOVer.visible = false//creating boy running
+//creating boy running
 boy = createSprite(70,580,20,20);
 boy.addAnimation("SahilRunning",boyImg);
 boy.scale=0.08;
@@ -43,11 +43,11 @@ swordGroup=new Group();
 }
 
 function draw() {
-
+  drawSprites();
   if(gameState===PLAY){
-  background(0);
-  boy.x = World.mouseX;
   
+  boy.x = World.mouseX;
+  gameOVer.visible = false
   edges= createEdgeSprites();
   boy.collide(edges);
   
@@ -80,19 +80,21 @@ function draw() {
     }
   }
   
-  drawSprites();
+ 
   textSize(20);
   fill(255);
   text("Treasure: "+ treasureCollection,150,30);
   }
   if (gameState === END){
-    cashG.setVelocityYEach = 0
-    diamondsG.setVelocityYEach = 0
-    jwelleryG.setVelocityYEach = 0
-    swordGroup.setVelocityYEach = 0
+    cashG.setVelocityYEach(0) 
+    diamondsG.setVelocityYEach(0) 
+    jwelleryG.setVelocityYEach(0) 
+    swordGroup.setVelocityYEach(0) 
     gameOVer.visible = true
+    console.log(9)
+    path.velocityY = 0
   }
-
+  
 }
 
 function createCash() {
